@@ -14,20 +14,15 @@ import 'package:http/http.dart' as http;
 
 import '../../../resources/strings/strings.dart';
 import '../../../widgets/text_styles.dart';
-import '../page/airconditionC6H6_build.dart';
 import '../page/airconditionCO_build.dart';
 import '../page/airconditionPM10_build.dart';
 import '../page/airconditionSO2.dart';
-import 'bloc/air_condition_city_main_page_bloc.dart';
 
 class AirConditionCityMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext ct) {
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => AirConditionCityMainPageBloc(),
-        child: AirConditionCityMainPageMain(),
-      ),
+      body: AirConditionCityMainPageMain(),
     );
   }
 }
