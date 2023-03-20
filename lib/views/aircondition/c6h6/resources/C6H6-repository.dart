@@ -5,7 +5,7 @@ class C6H6Repository {
   final _provider = C6H6Provider();
 
   Future<C6H6Model> fetchC6H6List() {
-    return _provider.fetchCovidList();
+    return _provider.fetchC6H6List();
   }
 }
 
