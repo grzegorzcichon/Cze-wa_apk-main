@@ -1,43 +1,43 @@
 import 'package:czestochowa_app/resources/colors/colors.dart';
-import 'package:czestochowa_app/views/aircondition/c6h6/model/c6h6_model.dart';
-import 'package:czestochowa_app/views/aircondition/c6h6/bloc/C6H6-bloc.dart';
+import 'package:czestochowa_app/views/aircondition/No2/model/NO2_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../resources/strings/strings.dart';
 import '../../../../widgets/text_styles.dart';
+import '../bloc/NO2-bloc.dart';
 
-class C6H6Page extends StatefulWidget {
-  const C6H6Page({Key? key}) : super(key: key);
+class NO2Page extends StatefulWidget {
+  const NO2Page({Key? key}) : super(key: key);
 
   @override
-  _C6H6PageState createState() => _C6H6PageState();
+  _NO2PageState createState() => _NO2PageState();
 }
 
-class _C6H6PageState extends State<C6H6Page> {
-  final C6H6Bloc _c6h6Bloc = C6H6Bloc();
+class _NO2PageState extends State<NO2Page> {
+  final NO2Bloc _no2Bloc = NO2Bloc();
 
   @override
   void initState() {
-    _c6h6Bloc.add(GetC6H6List());
+    _no2Bloc.add(GetNO2List());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: _buildListC6H6(),
+      child: _buildListNO2(),
     );
   }
 
-  Widget _buildListC6H6() {
+  Widget _buildListNO2() {
     return Container(
       margin: const EdgeInsets.all(8.0),
       child: BlocProvider(
-        create: (_) => _c6h6Bloc,
-        child: BlocListener<C6H6Bloc, C6H6State>(
+        create: (_) => _no2Bloc,
+        child: BlocListener<NO2Bloc, NO2State>(
           listener: (context, state) {
-            if (state is C6H6Error) {
+            if (state is NO2Error) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.message!),
@@ -45,15 +45,15 @@ class _C6H6PageState extends State<C6H6Page> {
               );
             }
           },
-          child: BlocBuilder<C6H6Bloc, C6H6State>(
+          child: BlocBuilder<NO2Bloc, NO2State>(
             builder: (context, state) {
-              if (state is C6H6dInitial) {
+              if (state is NO2Initial) {
                 return _buildLoading();
-              } else if (state is C6H6Loading) {
+              } else if (state is NO2Loading) {
                 return _buildLoading();
-              } else if (state is C6H6Loaded) {
-                return _buildCard(context, state.c6h6Model);
-              } else if (state is C6H6Error) {
+              } else if (state is NO2Loaded) {
+                return _buildCard(context, state.no2Model);
+              } else if (state is NO2Error) {
                 return Container();
               } else {
                 return Container();
@@ -65,7 +65,7 @@ class _C6H6PageState extends State<C6H6Page> {
     );
   }
 
-  Widget _buildCard(BuildContext context, C6H6Model model) {
+  Widget _buildCard(BuildContext context, NO2Model model) {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       itemCount: 1,
@@ -81,7 +81,7 @@ class _C6H6PageState extends State<C6H6Page> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "${Str.label.c6h6value}${double.parse(model.values![index + 1].value.toString()).toStringAsFixed(2)}${Str.label.airconditionunit}",
+                  "${Str.label.no2value}${double.parse(model.values![index + 1].value.toString()).toStringAsFixed(2)}${Str.label.airconditionunit}",
                   style: TextStyleSS.overline(
                       color: Theme.of(context).colorScheme.fontdistrictnametext,
                       context: context),
