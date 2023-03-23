@@ -1,43 +1,44 @@
 import 'package:czestochowa_app/resources/colors/colors.dart';
-import 'package:czestochowa_app/views/aircondition/No2/model/NO2_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../resources/strings/strings.dart';
 import '../../../../widgets/text_styles.dart';
-import '../bloc/NO2-bloc.dart';
+import '../bloc/PM10-bloc.dart';
+import '../model/pm10_model.dart';
 
-class NO2Page extends StatefulWidget {
-  const NO2Page({Key? key}) : super(key: key);
+class PM10Page extends StatefulWidget {
+  const PM10Page({Key? key}) : super(key: key);
 
   @override
-  _NO2PageState createState() => _NO2PageState();
+  _PM10PageState createState() => _PM10PageState();
 }
 
-class _NO2PageState extends State<NO2Page> {
-  final NO2Bloc _no2Bloc = NO2Bloc();
+class _PM10PageState extends State<PM10Page> {
+  final PM10Bloc _pm10Bloc = PM10Bloc();
 
   @override
   void initState() {
-    _no2Bloc.add(GetNO2List());
+    _pm10Bloc.add(GetPM10List());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: _buildListNO2(),
+      child: _buildListPM10(),
     );
   }
 
-  Widget _buildListNO2() {
+  Widget _buildListPM10() {
     return Container(
       margin: const EdgeInsets.all(8.0),
       child: BlocProvider(
-        create: (_) => _no2Bloc,
-        child: BlocListener<NO2Bloc, NO2State>(
+        create: (_) => _pm10Bloc,
+        child: BlocListener<PM10Bloc, PM10State>(
           listener: (context, state) {
-            if (state is NO2Error) {
+            if (state is PM10Error) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.message!),
@@ -45,15 +46,15 @@ class _NO2PageState extends State<NO2Page> {
               );
             }
           },
-          child: BlocBuilder<NO2Bloc, NO2State>(
+          child: BlocBuilder<PM10Bloc, PM10State>(
             builder: (context, state) {
-              if (state is NO2Initial) {
+              if (state is PM10Initial) {
                 return _buildLoading();
-              } else if (state is NO2Loading) {
+              } else if (state is PM10Loading) {
                 return _buildLoading();
-              } else if (state is NO2Loaded) {
-                return _buildCard(context, state.no2Model);
-              } else if (state is NO2Error) {
+              } else if (state is PM10Loaded) {
+                return _buildCard(context, state.pm10Model);
+              } else if (state is PM10Error) {
                 return Container();
               } else {
                 return Container();
@@ -65,7 +66,7 @@ class _NO2PageState extends State<NO2Page> {
     );
   }
 
-  Widget _buildCard(BuildContext context, NO2Model model) {
+  Widget _buildCard(BuildContext context, PM10Model model) {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       itemCount: 1,
@@ -81,7 +82,7 @@ class _NO2PageState extends State<NO2Page> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "${Str.label.no2value}${double.parse(model.values![index + 1].value.toString()).toStringAsFixed(2)}${Str.label.airconditionunit}",
+                  "${Str.label.pm10value}${double.parse(model.values![index + 1].value.toString()).toStringAsFixed(2)}${Str.label.airconditionunit}",
                   style: TextStyleSS.overline(
                       color: Theme.of(context).colorScheme.fontdistrictnametext,
                       context: context),

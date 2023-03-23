@@ -1,13 +1,13 @@
 // To parse this JSON data, do
 //
-//     final NO2Model = NO2ModelFromJson(jsonString);
+//     final c6H6Model = c6H6ModelFromJson(jsonString);
 
 import 'dart:convert';
 
-class NO2Model {
+class PM10Model {
   var length;
 
-  NO2Model({
+  PM10Model({
     this.key,
     this.values,
   });
@@ -16,18 +16,18 @@ class NO2Model {
   List<Value>? values;
   String? error;
 
-  factory NO2Model.fromRawJson(String str) =>
-      NO2Model.fromJson(json.decode(str));
+  factory PM10Model.fromRawJson(String str) =>
+      PM10Model.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  NO2Model.withError(
+  PM10Model.withError(
     String errorMessage,
   ) {
     error = errorMessage;
   }
 
-  factory NO2Model.fromJson(Map<String, dynamic> json) => NO2Model(
+  factory PM10Model.fromJson(Map<String, dynamic> json) => PM10Model(
         key: json["key"],
         values: json["values"] == null
             ? []

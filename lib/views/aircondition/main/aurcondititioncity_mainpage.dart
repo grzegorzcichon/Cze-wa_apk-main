@@ -1,17 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:czestochowa_app/resources/colors/colors.dart';
-import 'package:czestochowa_app/views/aircondition/No2/page/NO2-page.dart';
-import 'package:czestochowa_app/views/aircondition/c6h6/page/C6H6-page.dart';
 import 'package:czestochowa_app/views/aircondition/page/airconditionNO2_build.dart';
 import 'package:czestochowa_app/views/aircondition/page/airconditionO3_build.dart';
+import 'package:czestochowa_app/views/aircondition/pm10/page/PM10-page.dart';
 import 'package:flutter/material.dart';
 import 'package:full_screen_image_null_safe/full_screen_image_null_safe.dart';
 
 import '../../../resources/strings/strings.dart';
 import '../../../widgets/appbars/appbars.dart';
 import '../../../widgets/text_styles.dart';
+import '../c6h6/page/C6H6-page.dart';
 import '../co/page/CO-page.dart';
 import '../page/airconditionPM10_build.dart';
 import '../page/airconditionSO2.dart';
@@ -221,7 +220,7 @@ class _AirConditionCityMainPageMainState
             return Container(
                 height: MediaQuery.of(context).size.height / 15,
                 margin: EdgeInsets.only(bottom: 1.7),
-                child: NO2Page());
+                child: GetNO2Value());
           }),
         ],
       ),
@@ -239,7 +238,9 @@ class _AirConditionCityMainPageMainState
             return Container(
                 height: MediaQuery.of(context).size.height / 15,
                 margin: EdgeInsets.only(bottom: 1.7),
-                child: GetPM10Value());
+                child: PM10Page()
+                // GetPM10Value()
+                );
           }),
         ],
       ),
