@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/services.dart';
 
 class DeviceInfoApi {
   static final _deviceInfoPlugin = DeviceInfoPlugin();

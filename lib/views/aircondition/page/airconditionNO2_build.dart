@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:czestochowa_app/resources/colors/colors.dart';
 import 'package:czestochowa_app/resources/strings/strings.dart';
 import 'package:czestochowa_app/views/aircondition/aircindition_NO2.dart';
-import 'package:czestochowa_app/views/aircondition/aircindition_O3.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

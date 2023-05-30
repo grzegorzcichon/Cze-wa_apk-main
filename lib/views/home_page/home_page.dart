@@ -3,28 +3,27 @@ import 'package:czestochowa_app/views/aircondition/main/aurcondititioncity_mainp
 import 'package:czestochowa_app/views/districts/main/districts_mainpage.dart';
 import 'package:czestochowa_app/views/weather/main/weather_homepage.dart';
 import 'package:czestochowa_app/widgets/buttons/buttons.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../resources/strings/strings.dart';
 import '../../widgets/appbars/appbars.dart';
-import '../../widgets/custom_keys.dart';
 import '../../widgets/text_styles.dart';
 import 'bloc/home_page_bloc.dart';
 
-void main() => runApp(HomePage());
+void main() => runApp(const HomePage());
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 
   static BlocProvider withBlocProvider() {
     return BlocProvider<HomePageBloc>(
       create: (context) => HomePageBloc(),
-      child: HomePage(),
+      child: const HomePage(),
     );
   }
 }
@@ -50,6 +49,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
 class Home extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Home({super.key});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -73,15 +74,15 @@ class Home extends StatelessWidget {
               padding: const EdgeInsets.only(top: 50),
               child: Column(
                 children: <Widget>[
-                  Container(
+                  SizedBox(
                       width: MediaQuery.of(context).size.width / 1.2,
                       height: MediaQuery.of(context).size.height * 0.1,
                       child: _buildGotoAirCondition()),
-                  Container(
+                  SizedBox(
                       width: MediaQuery.of(context).size.width / 1.2,
                       height: MediaQuery.of(context).size.height * 0.1,
                       child: _buildGotoDiscritsc()),
-                  Container(
+                  SizedBox(
                       width: MediaQuery.of(context).size.width / 1.2,
                       height: MediaQuery.of(context).size.height * 0.1,
                       child: _buildGotoWeather()),
@@ -94,15 +95,15 @@ class Home extends StatelessWidget {
 
   Widget _buildRow({Widget? child}) {
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20),
       child: child,
     );
   }
 
-  Widget _buildGotoAirCondition({Widget? child}) {
+  Widget _buildGotoAirCondition() {
     return Builder(builder: (context) {
       return Container(
-          margin: EdgeInsets.only(top: 20),
+          margin: const EdgeInsets.only(top: 20),
           child: BaseButton(
             color: Theme.of(context).colorScheme.basebuttonColor,
             textView: Text(Str.buttons.aircondition,
@@ -120,10 +121,10 @@ class Home extends StatelessWidget {
     });
   }
 
-  Widget _buildGotoDiscritsc({Widget? child}) {
+  Widget _buildGotoDiscritsc() {
     return Builder(builder: (context) {
       return Container(
-          margin: EdgeInsets.only(top: 20),
+          margin: const EdgeInsets.only(top: 20),
           child: BaseButton(
             color: Theme.of(context).colorScheme.basebuttonColor,
             textView: Text(Str.buttons.gotoczestochowadustrict,
@@ -133,17 +134,17 @@ class Home extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => DistrictsMainPage()),
+                MaterialPageRoute(builder: (context) => DistrictsPageMain()),
               );
             },
           ));
     });
   }
 
-  Widget _buildGotoWeather({Widget? child}) {
+  Widget _buildGotoWeather() {
     return Builder(builder: (context) {
       return Container(
-          margin: EdgeInsets.only(top: 20),
+          margin: const EdgeInsets.only(top: 20),
           child: BaseButton(
             color: Theme.of(context).colorScheme.basebuttonColor,
             textView: Text(Str.buttons.gotowatherforecast,
@@ -154,7 +155,8 @@ class Home extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => WeatherHomePage()),
+                MaterialPageRoute(
+                    builder: (context) => const WeatherHomePage()),
               );
             },
           ));
