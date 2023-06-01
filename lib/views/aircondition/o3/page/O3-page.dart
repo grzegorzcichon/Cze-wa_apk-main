@@ -1,43 +1,43 @@
 import 'package:czestochowa_app/resources/colors/colors.dart';
-import 'package:czestochowa_app/views/aircondition/c6h6/model/c6h6_model.dart';
-import 'package:czestochowa_app/views/aircondition/c6h6/bloc/C6H6-bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../resources/strings/strings.dart';
 import '../../../../widgets/text_styles.dart';
+import '../bloc/O3-bloc.dart';
+import '../model/o3_model.dart';
 
-class C6H6Page extends StatefulWidget {
-  const C6H6Page({Key? key}) : super(key: key);
+class O3Page extends StatefulWidget {
+  const O3Page({Key? key}) : super(key: key);
 
   @override
-  _C6H6PageState createState() => _C6H6PageState();
+  _O3PageState createState() => _O3PageState();
 }
 
-class _C6H6PageState extends State<C6H6Page> {
-  final C6H6Bloc _c6h6Bloc = C6H6Bloc();
+class _O3PageState extends State<O3Page> {
+  final O3Bloc _covidBloc = O3Bloc();
 
   @override
   void initState() {
-    _c6h6Bloc.add(GetC6H6List());
+    _covidBloc.add(O3List());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: _buildListC6H6(),
+      child: _buildListCovid(),
     );
   }
 
-  Widget _buildListC6H6() {
+  Widget _buildListCovid() {
     return Container(
       margin: const EdgeInsets.all(8.0),
       child: BlocProvider(
-        create: (_) => _c6h6Bloc,
-        child: BlocListener<C6H6Bloc, C6H6State>(
+        create: (_) => _covidBloc,
+        child: BlocListener<O3Bloc, O3State>(
           listener: (context, state) {
-            if (state is C6H6Error) {
+            if (state is O3Error) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.message!),
@@ -45,15 +45,15 @@ class _C6H6PageState extends State<C6H6Page> {
               );
             }
           },
-          child: BlocBuilder<C6H6Bloc, C6H6State>(
+          child: BlocBuilder<O3Bloc, O3State>(
             builder: (context, state) {
-              if (state is C6H6dInitial) {
+              if (state is O3dInitial) {
                 return _buildLoading();
-              } else if (state is C6H6Loading) {
+              } else if (state is O3Loading) {
                 return _buildLoading();
-              } else if (state is C6H6Loaded) {
-                return _buildCard(context, state.c6h6Model);
-              } else if (state is C6H6Error) {
+              } else if (state is O3Loaded) {
+                return _buildCard(context, state.o3Model);
+              } else if (state is O3Error) {
                 return Container();
               } else {
                 return Container();
@@ -65,7 +65,7 @@ class _C6H6PageState extends State<C6H6Page> {
     );
   }
 
-  Widget _buildCard(BuildContext context, C6H6Model model) {
+  Widget _buildCard(BuildContext context, O3Model model) {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       itemCount: 1,
@@ -81,7 +81,7 @@ class _C6H6PageState extends State<C6H6Page> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "${Str.label.c6h6value}${(model.values?[index + 1].value ?? 0.0).toStringAsFixed(2)}${Str.label.airconditionunit}",
+                  "${Str.label.o3value}${double.parse(model.values![index + 1].value.toString()).toStringAsFixed(2)}${Str.label.airconditionunit}",
                   style: TextStyleSS.overline(
                       color: Theme.of(context).colorScheme.fontdistrictnametext,
                       context: context),

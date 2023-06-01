@@ -9,7 +9,7 @@ final controller = TextEditingController();
 Future<PM10> getPM10() async {
   const url = "https://api.gios.gov.pl/pjp-api/rest/data/getData/5256";
   final response = await http.get(Uri.parse(url));
-  final body = json.decode(response.body);
+  //final body = json.decode(response.body);
   print('PM10 :');
   print(jsonDecode(response.body)['values'][1]);
   return PM10.fromJson(jsonDecode(response.body)['values'][1]);
