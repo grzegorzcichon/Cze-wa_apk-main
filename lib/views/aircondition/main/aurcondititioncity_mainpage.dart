@@ -3,8 +3,9 @@ import 'dart:io';
 
 import 'package:czestochowa_app/resources/colors/colors.dart';
 import 'package:czestochowa_app/views/aircondition/c6h6/page/C6H6-page.dart';
+import 'package:czestochowa_app/views/aircondition/co/page/CO_page.dart';
+import 'package:czestochowa_app/views/aircondition/no2/page/NO2-page.dart';
 import 'package:czestochowa_app/views/aircondition/o3/page/O3-page.dart';
-import 'package:czestochowa_app/views/aircondition/page/airconditionNO2_build.dart';
 import 'package:czestochowa_app/views/aircondition/so2/page/SO2-page.dart';
 import 'package:czestochowa_app/widgets/appbars/appbars.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,8 +16,8 @@ import 'package:http/http.dart' as http;
 
 import '../../../resources/strings/strings.dart';
 import '../../../widgets/text_styles.dart';
-import '../page/airconditionCO_build.dart';
 import '../page/airconditionPM10_build.dart';
+
 
 class AirConditionCityMainPage extends StatelessWidget {
   @override
@@ -185,7 +186,9 @@ class _AirConditionCityMainPageMainState
         children: <Widget>[
           Builder(builder: (context) {
             return Container(
+
                 height: MediaQuery.of(context).size.height / 20,
+
                 margin: EdgeInsets.only(bottom: 1.7),
                 child: O3Page());
           }),
@@ -203,9 +206,11 @@ class _AirConditionCityMainPageMainState
         children: <Widget>[
           Builder(builder: (context) {
             return Container(
+
                 height: MediaQuery.of(context).size.height / 105,
+
                 margin: EdgeInsets.only(bottom: 1.7),
-                child: GetCOValue());
+                child: COPage1());
           }),
         ],
       ),
@@ -221,7 +226,7 @@ class _AirConditionCityMainPageMainState
         children: <Widget>[
           Builder(builder: (context) {
             return Container(
-                height: MediaQuery.of(context).size.height / 45,
+                height: MediaQuery.of(context).size.height / 15,
                 margin: EdgeInsets.only(bottom: 1.7),
                 child: GetNO2Value());
           }),
@@ -239,9 +244,11 @@ class _AirConditionCityMainPageMainState
         children: <Widget>[
           Builder(builder: (context) {
             return Container(
-                height: MediaQuery.of(context).size.height / 45,
+                height: MediaQuery.of(context).size.height / 15,
                 margin: EdgeInsets.only(bottom: 1.7),
-                child: GetPM10Value());
+                child: PM10Page()
+                // GetPM10Value()
+                );
           }),
         ],
       ),
@@ -259,7 +266,9 @@ class _AirConditionCityMainPageMainState
             return Container(
                 height: MediaQuery.of(context).size.height / 15,
                 margin: EdgeInsets.only(bottom: 1.7),
+
                 child: SO2Page());
+
           }),
         ],
       ),

@@ -1,43 +1,44 @@
 import 'package:czestochowa_app/resources/colors/colors.dart';
-import 'package:czestochowa_app/views/aircondition/c6h6/model/c6h6_model.dart';
-import 'package:czestochowa_app/views/aircondition/c6h6/bloc/C6H6-bloc.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../resources/strings/strings.dart';
 import '../../../../widgets/text_styles.dart';
+import '../bloc/PM10-bloc.dart';
+import '../model/pm10_model.dart';
 
-class C6H6Page extends StatefulWidget {
-  const C6H6Page({Key? key}) : super(key: key);
+class PM10Page extends StatefulWidget {
+  const PM10Page({Key? key}) : super(key: key);
 
   @override
-  _C6H6PageState createState() => _C6H6PageState();
+  _PM10PageState createState() => _PM10PageState();
 }
 
-class _C6H6PageState extends State<C6H6Page> {
-  final C6H6Bloc _c6h6Bloc = C6H6Bloc();
+class _PM10PageState extends State<PM10Page> {
+  final PM10Bloc _pm10Bloc = PM10Bloc();
 
   @override
   void initState() {
-    _c6h6Bloc.add(GetC6H6List());
+    _pm10Bloc.add(GetPM10List());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: _buildListC6H6(),
+      child: _buildListPM10(),
     );
   }
 
-  Widget _buildListC6H6() {
+  Widget _buildListPM10() {
     return Container(
       margin: const EdgeInsets.all(8.0),
       child: BlocProvider(
-        create: (_) => _c6h6Bloc,
-        child: BlocListener<C6H6Bloc, C6H6State>(
+        create: (_) => _pm10Bloc,
+        child: BlocListener<PM10Bloc, PM10State>(
           listener: (context, state) {
-            if (state is C6H6Error) {
+            if (state is PM10Error) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.message!),
@@ -45,15 +46,15 @@ class _C6H6PageState extends State<C6H6Page> {
               );
             }
           },
-          child: BlocBuilder<C6H6Bloc, C6H6State>(
+          child: BlocBuilder<PM10Bloc, PM10State>(
             builder: (context, state) {
-              if (state is C6H6dInitial) {
+              if (state is PM10Initial) {
                 return _buildLoading();
-              } else if (state is C6H6Loading) {
+              } else if (state is PM10Loading) {
                 return _buildLoading();
-              } else if (state is C6H6Loaded) {
-                return _buildCard(context, state.c6h6Model);
-              } else if (state is C6H6Error) {
+              } else if (state is PM10Loaded) {
+                return _buildCard(context, state.pm10Model);
+              } else if (state is PM10Error) {
                 return Container();
               } else {
                 return Container();
@@ -65,7 +66,7 @@ class _C6H6PageState extends State<C6H6Page> {
     );
   }
 
-  Widget _buildCard(BuildContext context, C6H6Model model) {
+  Widget _buildCard(BuildContext context, PM10Model model) {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       itemCount: 1,
@@ -81,7 +82,7 @@ class _C6H6PageState extends State<C6H6Page> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "${Str.label.c6h6value}${(model.values?[index + 1].value ?? 0.0).toStringAsFixed(2)}${Str.label.airconditionunit}",
+                  "${Str.label.pm10value}${double.parse(model.values![index + 1].value.toString()).toStringAsFixed(2)}${Str.label.airconditionunit}",
                   style: TextStyleSS.overline(
                       color: Theme.of(context).colorScheme.fontdistrictnametext,
                       context: context),
