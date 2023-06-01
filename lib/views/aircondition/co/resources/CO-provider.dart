@@ -1,21 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-import '../model/c6h6_model.dart';
+import '../model/co_model.dart';
 
-class C6H6Provider {
+class COProvider {
   final Dio _dio = Dio();
-  final String _url = 'https://api.gios.gov.pl/pjp-api/rest/data/getData/14913';
+  final String _url = 'https://api.gios.gov.pl/pjp-api/rest/data/getData/5246';
 
-  Future<C6H6Model> fetchC6H6List() async {
+  Future<COModel> fetchCOList() async {
     try {
       Response response = await _dio.get(_url);
-      return C6H6Model.fromJson((response.data));
+      return COModel.fromJson((response.data));
     } catch (error, stacktrace) {
       if (kDebugMode) {
         print("Exception occured: $error stackTrace: $stacktrace");
       }
-      return C6H6Model.withError("Data not found / Connection issue");
+      return COModel.withError("Data not found / Connection issue");
     }
   }
 }
